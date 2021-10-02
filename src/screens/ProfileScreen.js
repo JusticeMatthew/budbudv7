@@ -23,7 +23,7 @@ export default ProfileScreen = () => {
   return (
     <Container>
       <StatusBar style='dark' />
-      <Text>User ID: {user.name}</Text>
+      <Text>User ID: {user.uid}</Text>
 
       <Logout onPress={logout}>
         <Text medium color='whitesmoke'>

@@ -17,6 +17,8 @@ export default HomeScreen = () => {
 
   useEffect(() => {
     firebase.getBuds(user.uid).then((res) => setBuds(res));
+
+    return;
   }, [buds]);
 
   const rightActions = (dragX, docID) => {
