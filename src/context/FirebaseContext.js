@@ -71,18 +71,38 @@ const Firebase = {
     }
   },
 
-  addPost: async ({ uid, name, price, type, location, thc, cbd }) => {
+  addBud: async ({ uid, name, price, type, location, thc, cbd }) => {
     try {
-      await db.collection('users').doc(uid).collection('buds').add({
-        name,
-        price,
-        type,
-        location,
-        thc,
-        cbd,
-      });
+      const docRef = await db
+        .collection('users')
+        .doc(uid)
+        .collection('buds')
+        .add({
+          name,
+          price,
+          type,
+          location,
+          thc,
+          cbd,
+        });
+
+      await db
+        .collection('users')
+        .doc(uid)
+        .collection('buds')
+        .doc(docRef.id)
+        .update({ id: docRef.id });
     } catch (error) {
       alert(error);
+    }
+  },
+
+  deleteBud: async (docId) => {
+    try {
+      const uid = await Firebase.getCurrentUser().uid;
+      db.collection('users').doc(uid).collection('buds').doc(docId).delete();
+    } catch (error) {
+      console.log('Error @deleteBud: ', error);
     }
   },
 

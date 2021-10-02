@@ -33,7 +33,7 @@ export default function PostScreen({ navigation }) {
     }
 
     try {
-      firebase.addPost({
+      firebase.addBud({
         uid: user.uid,
         name: name.trim(),
         price: price,
