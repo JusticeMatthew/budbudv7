@@ -12,8 +12,11 @@ import tempData from '../../tempData';
 export default HomeScreen = () => {
   const [user, setUser] = useContext(UserContext);
   const firebase = useContext(FirebaseContext);
+  const [buds, setBuds] = useState([]);
 
-  console.log(user);
+  useEffect(() => {
+    firebase.getBuds(user.uid).then((res) => setBuds(res));
+  }, [buds]);
 
   const renderBud = ({ item }) => (
     <PostContainer>
@@ -38,7 +41,7 @@ export default HomeScreen = () => {
           {user.name}'s Buds
         </Text>
         <Buds
-          data={user.buds}
+          data={buds}
           renderItem={renderBud}
           keyExtractor={(item) => item.name}
         />
@@ -55,7 +58,9 @@ const Container = styled.View`
 
 const BudContainer = styled.View``;
 
-const Buds = styled.FlatList``;
+const Buds = styled.FlatList`
+  margin: 18px 0 48px;
+`;
 
 const PostContainer = styled.View`
   background-color: whitesmoke;

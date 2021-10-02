@@ -37,13 +37,12 @@ const Firebase = {
       await db.collection('users').doc(uid).set({
         name: user.name,
         email: user.email,
-        buds: user.buds,
       });
 
       delete user.password;
-      return { ...user, uid, buds };
+      return { ...user, uid };
     } catch (error) {
-      console.log('Error @createUser: ', error);
+      alert(error);
     }
   },
 
@@ -56,6 +55,34 @@ const Firebase = {
       }
     } catch (error) {
       console.log('Error @getuserinfo: ', error);
+    }
+  },
+
+  getBuds: async (uid) => {
+    try {
+      const snapshot = await db
+        .collection('users')
+        .doc(uid)
+        .collection('buds')
+        .get();
+      return snapshot.docs.map((doc) => doc.data());
+    } catch (error) {
+      console.log('Error @getBuds ', error);
+    }
+  },
+
+  addPost: async ({ uid, name, price, type, location, thc, cbd }) => {
+    try {
+      await db.collection('users').doc(uid).collection('buds').add({
+        name,
+        price,
+        type,
+        location,
+        thc,
+        cbd,
+      });
+    } catch (error) {
+      alert(error);
     }
   },
 

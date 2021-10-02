@@ -22,15 +22,13 @@ export default function PostScreen({ navigation }) {
   const [location, setLocation] = useState('');
   const [thc, setThc] = useState('');
   const [cbd, setCbd] = useState('');
-  const [benefits, setBenefits] = useState('');
-  const [negatives, setNegatives] = useState('');
 
   const firebase = useContext(FirebaseContext);
   const [user, _] = useContext(UserContext);
 
   const handlePost = () => {
     if (!name.trim()) {
-      alert('Please Enter Name');
+      alert('Your bud requires at least a name');
       return;
     }
 
@@ -43,8 +41,6 @@ export default function PostScreen({ navigation }) {
         location: location.trim(),
         thc: thc,
         cbd: cbd,
-        benefits: benefits,
-        negatives: negatives,
       });
     } catch (error) {
       alert(error);
@@ -55,8 +51,6 @@ export default function PostScreen({ navigation }) {
       setLocation('');
       setThc('');
       setCbd('');
-      setBenefits('');
-      setNegatives('');
       navigation.goBack();
     }
   };
@@ -111,22 +105,6 @@ export default function PostScreen({ navigation }) {
             style={styles.input}
             onChangeText={(cbd) => setCbd(cbd)}
             value={cbd}
-          ></TextInput>
-          <Text style={styles.inputTitle}>Benefits</Text>
-          <TextInput
-            style={[styles.input, { height: 100 }]}
-            multiline={true}
-            numberOfLines={4}
-            onChangeText={(benefits) => setBenefits(benefits)}
-            value={benefits}
-          ></TextInput>
-          <Text style={styles.inputTitle}>Negatives</Text>
-          <TextInput
-            style={[styles.input, { height: 80 }]}
-            multiline={true}
-            numberOfLines={4}
-            onChangeText={(negatives) => setNegatives(negatives)}
-            value={negatives}
           ></TextInput>
         </View>
       </ScrollView>

@@ -25,7 +25,6 @@ export default LoadingScreen = () => {
           email: userInfo.email,
           uid: user.uid,
           name: userInfo.name,
-          buds: userInfo.buds,
         });
       } else {
         setUser((state) => ({ ...state, isLoggedIn: false }));
