@@ -63,11 +63,11 @@ export default function PostScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style='light' />
+      <StatusBar style='dark' />
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        {/* <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name='md-arrow-back' size={24} color={colors.gray} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity onPress={handlePost} style={styles.addButton}>
           <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Add</Text>
         </TouchableOpacity>
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
 
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     paddingHorizontal: 32,
     paddingVertical: 12,
     marginTop: 48,

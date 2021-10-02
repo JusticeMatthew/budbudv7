@@ -13,6 +13,8 @@ export default HomeScreen = () => {
   const [user, setUser] = useContext(UserContext);
   const firebase = useContext(FirebaseContext);
 
+  console.log(user);
+
   const renderBud = ({ item }) => (
     <PostContainer>
       <PostContent>
@@ -22,8 +24,8 @@ export default HomeScreen = () => {
         <Text medium>Price: {item.price}</Text>
         <Text medium>Type of Medicine: {item.type}</Text>
         <Text medium>Purchased at: {item.location}</Text>
-        <Text medium>THC Percentage: {item.thc}</Text>
-        <Text medium>CBD Percentage: {item.cbd}</Text>
+        <Text medium>THC Amount: {item.thc}</Text>
+        <Text medium>CBD Amount: {item.cbd}</Text>
       </PostContent>
     </PostContainer>
   );
@@ -36,9 +38,9 @@ export default HomeScreen = () => {
           {user.name}'s Buds
         </Text>
         <Buds
-          data={tempData}
+          data={user.buds}
           renderItem={renderBud}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.name}
         />
       </BudContainer>
     </Container>

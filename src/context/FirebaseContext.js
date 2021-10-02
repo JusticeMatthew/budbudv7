@@ -37,10 +37,11 @@ const Firebase = {
       await db.collection('users').doc(uid).set({
         name: user.name,
         email: user.email,
+        buds: user.buds,
       });
 
       delete user.password;
-      return { ...user, uid };
+      return { ...user, uid, buds };
     } catch (error) {
       console.log('Error @createUser: ', error);
     }
@@ -72,41 +73,6 @@ const Firebase = {
 
   login: async (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
-  },
-
-  addPost: async ({
-    uid,
-    name,
-    price,
-    type,
-    location,
-    thc,
-    cbd,
-    benefits,
-    negatives,
-  }) => {
-    return new Promise((res, rej) => {
-      db.collection('users')
-        .doc(uid)
-        .collection('buds')
-        .add({
-          uid,
-          name,
-          price,
-          type,
-          location,
-          thc,
-          cbd,
-          benefits,
-          negatives,
-        })
-        .then((ref) => {
-          res(ref);
-        })
-        .catch((error) => {
-          rej(error);
-        });
-    });
   },
 };
 

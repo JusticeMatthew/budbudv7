@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
@@ -21,6 +22,7 @@ export default ProfileScreen = () => {
 
   return (
     <Container>
+      <StatusBar style='dark' />
       <Text>User ID: {user.name}</Text>
 
       <Logout onPress={logout}>

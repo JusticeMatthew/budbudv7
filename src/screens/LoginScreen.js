@@ -29,6 +29,7 @@ export default LoginScreen = ({ navigation }) => {
         email: userInfo.email,
         uid,
         isLoggedIn: true,
+        buds: userInfo.buds,
       });
     } catch (error) {
       alert(error.message);
