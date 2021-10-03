@@ -12,15 +12,12 @@ import Text from '../components/Text';
 import colors from '../design/colors';
 
 export default HomeScreen = () => {
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   const firebase = useContext(FirebaseContext);
   const [buds, setBuds] = useState([]);
-  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     firebase.getBuds(user.uid).then((res) => setBuds(res));
-
-    return;
   }, [buds]);
 
   const toggleFavorite = (docID) => {
