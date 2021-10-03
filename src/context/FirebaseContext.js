@@ -84,6 +84,7 @@ const Firebase = {
           location,
           thc,
           cbd,
+          favorite: false,
         });
 
       await db
@@ -99,10 +100,30 @@ const Firebase = {
 
   deleteBud: async (docId) => {
     try {
-      const uid = await Firebase.getCurrentUser().uid;
+      const uid = Firebase.getCurrentUser().uid;
       db.collection('users').doc(uid).collection('buds').doc(docId).delete();
     } catch (error) {
       console.log('Error @deleteBud: ', error);
+    }
+  },
+
+  setFavorite: async (docId) => {
+    try {
+      const uid = Firebase.getCurrentUser().uid;
+      db.collection('users')
+        .doc(uid)
+        .collection('buds')
+        .doc(docId)
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            return doc.ref.update({ favorite: !doc.data().favorite });
+          } else {
+            console.log('Error @setFavorite: ', error);
+          }
+        });
+    } catch (error) {
+      console.log('Error @setFavorite: ', error);
     }
   },
 

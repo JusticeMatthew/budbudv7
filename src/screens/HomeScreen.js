@@ -2,7 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Swipeable } from 'react-native-gesture-handler';
-import { Animated } from 'react-native';
+import { Animated, TouchableOpacity } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 import { UserContext } from '../context/UserContext';
 import { FirebaseContext } from '../context/FirebaseContext';
@@ -14,6 +15,7 @@ export default HomeScreen = () => {
   const [user, setUser] = useContext(UserContext);
   const firebase = useContext(FirebaseContext);
   const [buds, setBuds] = useState([]);
+  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     firebase.getBuds(user.uid).then((res) => setBuds(res));
@@ -21,9 +23,13 @@ export default HomeScreen = () => {
     return;
   }, [buds]);
 
+  const toggleFavorite = (docID) => {
+    firebase.setFavorite(docID);
+  };
+
   const rightActions = (dragX, docID) => {
     const scale = dragX.interpolate({
-      inputRange: [-100, 0],
+      inputRange: [-100, -20],
       outputRange: [1, 0.9],
       extrapolate: 'clamp',
     });
@@ -49,9 +55,16 @@ export default HomeScreen = () => {
     <Swipeable renderRightActions={(_, dragX) => rightActions(dragX, item.id)}>
       <PostContainer>
         <PostContent>
-          <Text large center>
-            {item.name}
-          </Text>
+          <PostHeader>
+            <Text large>{item.name}</Text>
+            <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
+              {item.favorite ? (
+                <AntDesign name='heart' size={32} color={colors.green} />
+              ) : (
+                <AntDesign name='hearto' size={32} color={colors.blue} />
+              )}
+            </TouchableOpacity>
+          </PostHeader>
           <Text medium>Price: {item.price}</Text>
           <Text medium>Type of Medicine: {item.type}</Text>
           <Text medium>Purchased at: {item.location}</Text>
@@ -99,6 +112,12 @@ const PostContainer = styled.View`
   border-left-color: ${colors.green};
 `;
 
+const PostHeader = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+`;
+
 const PostContent = styled.View`
   margin: 8px;
 `;
@@ -111,4 +130,6 @@ const DeleteButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-radius: 6px;
+  left: 30px;
+  margin-left: 30px;
 `;
