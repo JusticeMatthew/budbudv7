@@ -21,7 +21,7 @@ export default MainStackScreens = () => {
         case 'Home':
           iconName = 'home';
           break;
-        case 'Favorite':
+        case 'Favorites':
           iconName = 'heart';
           break;
         case 'Filter':
@@ -35,7 +35,7 @@ export default MainStackScreens = () => {
           iconName = 'home';
       }
 
-      if (route.name === 'Post') {
+      if (route.name === 'Add') {
         return <AntDesign name='pluscircle' size={42} color={colors.green} />;
       }
       return (
@@ -51,8 +51,8 @@ export default MainStackScreens = () => {
   return (
     <MainStack.Navigator screenOptions={screenOptions}>
       <MainStack.Screen name='Home' component={HomeScreen} />
-      <MainStack.Screen name='Favorite' component={FavoriteScreen} />
-      <MainStack.Screen name='Post' component={PostScreen} />
+      <MainStack.Screen name='Favorites' component={FavoriteScreen} />
+      <MainStack.Screen name='Add' component={PostScreen} />
       <MainStack.Screen name='Filter' component={FilterScreen} />
       <MainStack.Screen name='Profile' component={ProfileScreen} />
     </MainStack.Navigator>
