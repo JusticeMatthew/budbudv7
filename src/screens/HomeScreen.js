@@ -17,7 +17,10 @@ export default HomeScreen = () => {
   const [buds, setBuds] = useState([]);
 
   useEffect(() => {
-    firebase.getBuds(user.uid).then((res) => setBuds(res));
+    firebase
+      .getBuds(user.uid)
+      .then((res) => setBuds(res))
+      .catch((err) => console.log(err));
   }, [buds]);
 
   const toggleFavorite = (docID) => {
