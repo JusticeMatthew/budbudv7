@@ -90,7 +90,7 @@ export default HomeScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
       <BudContainer>
         <Text title center style={{ color: 'whitesmoke' }}>
           {user.name}'s Buds
@@ -108,7 +108,7 @@ export default HomeScreen = ({ navigation }) => {
 const Container = styled.View`
   flex: 1;
   background-color: ${colors.blue};
-  padding-top: 32px;
+  padding-top: 64px;
 `;
 
 const BudContainer = styled.View``;

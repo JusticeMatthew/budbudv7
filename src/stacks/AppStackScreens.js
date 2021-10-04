@@ -6,6 +6,7 @@ import { UserContext } from '../context/UserContext';
 import AuthStackScreens from './AuthStackScreens';
 import MainStackScreens from './MainStackScreens';
 import LoadingScreen from '../screens/LoadingScreen';
+import PostScreen from '../screens/PostScreen';
 
 export default AppStackScreens = () => {
   const AppStack = createStackNavigator();
@@ -20,6 +21,9 @@ export default AppStackScreens = () => {
       ) : (
         <AppStack.Screen name='Auth' component={AuthStackScreens} />
       )}
+      <AppStack.Group screenOptions={{ presentation: 'modal' }}>
+        <AppStack.Screen name='AddModal' component={PostScreen} />
+      </AppStack.Group>
     </AppStack.Navigator>
   );
 };

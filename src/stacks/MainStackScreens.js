@@ -5,7 +5,6 @@ import colors from '../design/colors';
 
 import HomeScreen from '../screens/HomeScreen';
 import FavoriteScreen from '../screens/FavoriteScreen';
-import PostScreen from '../screens/PostScreen';
 import FilterScreen from '../screens/FilterScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
@@ -13,6 +12,7 @@ export default MainStackScreens = () => {
   const MainStack = createBottomTabNavigator();
 
   const screenOptions = ({ route }) => ({
+    headerShown: false,
     tabBarShowLabel: false,
     tabBarIcon: ({ focused }) => {
       let iconName = 'home';
@@ -24,8 +24,8 @@ export default MainStackScreens = () => {
         case 'Favorites':
           iconName = 'heart';
           break;
-        case 'Filter':
-          iconName = 'filter';
+        case 'Search':
+          iconName = 'search';
           break;
         case 'Profile':
           iconName = 'user';
@@ -48,12 +48,23 @@ export default MainStackScreens = () => {
     },
   });
 
+  const PostTab = () => <></>;
+
   return (
     <MainStack.Navigator screenOptions={screenOptions}>
       <MainStack.Screen name='Home' component={HomeScreen} />
       <MainStack.Screen name='Favorites' component={FavoriteScreen} />
-      <MainStack.Screen name='Add' component={PostScreen} />
-      <MainStack.Screen name='Filter' component={FilterScreen} />
+      <MainStack.Screen
+        name='Add'
+        component={PostTab}
+        listeners={({ navigation }) => ({
+          tabPress: (event) => {
+            event.preventDefault();
+            navigation.navigate('AddModal');
+          },
+        })}
+      />
+      <MainStack.Screen name='Search' component={FilterScreen} />
       <MainStack.Screen name='Profile' component={ProfileScreen} />
     </MainStack.Navigator>
   );

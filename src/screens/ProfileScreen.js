@@ -22,7 +22,7 @@ export default ProfileScreen = () => {
 
   return (
     <Container>
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
       <Text>User ID: {user.uid}</Text>
 
       <Logout onPress={logout}>
