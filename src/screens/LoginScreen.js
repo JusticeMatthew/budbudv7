@@ -91,7 +91,7 @@ export default LoginScreen = ({ navigation }) => {
   );
 };
 
-const Container = styled.View`
+const Container = styled.KeyboardAvoidingView`
   background-color: ${colors.blue};
   flex: 1;
 `;

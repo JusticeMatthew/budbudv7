@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Swipeable } from 'react-native-gesture-handler';
 import { Animated, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import firebase from 'firebase';
+import 'firebase/firestore';
 
 import { UserContext } from '../context/UserContext';
 import { FirebaseContext } from '../context/FirebaseContext';
@@ -13,18 +15,28 @@ import colors from '../design/colors';
 
 export default HomeScreen = () => {
   const [user] = useContext(UserContext);
-  const firebase = useContext(FirebaseContext);
+  const fireboss = useContext(FirebaseContext);
   const [buds, setBuds] = useState([]);
 
   useEffect(() => {
-    firebase
-      .getBuds(user.uid)
-      .then((res) => setBuds(res))
-      .catch((err) => console.log(err));
-  }, [buds]);
+    const unsubscribe = firebase
+      .firestore()
+      .collection('users')
+      .doc(user.uid)
+      .collection('buds')
+      .onSnapshot((snapshot) => {
+        const budData = [];
+        snapshot.forEach((doc) => {
+          budData.push(doc.data());
+        });
+        setBuds(budData);
+      });
+
+    return unsubscribe;
+  }, []);
 
   const toggleFavorite = (docID) => {
-    firebase.setFavorite(docID);
+    fireboss.setFavorite(docID);
   };
 
   const rightActions = (dragX, docID) => {
