@@ -47,7 +47,7 @@ export default HomeScreen = () => {
     });
 
     return (
-      <DeleteButton onPress={() => firebase.deleteBud(docID)}>
+      <DeleteButton onPress={() => fireboss.deleteBud(docID)}>
         <Animated.View>
           <Animated.Text
             style={{
