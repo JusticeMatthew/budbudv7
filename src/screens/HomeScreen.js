@@ -12,7 +12,6 @@ import { FirebaseContext } from '../context/FirebaseContext';
 
 import Text from '../components/Text';
 import colors from '../design/colors';
-import { NavigationContainer } from '@react-navigation/native';
 
 export default HomeScreen = ({ navigation }) => {
   const [user] = useContext(UserContext);
