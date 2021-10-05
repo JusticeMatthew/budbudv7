@@ -97,7 +97,7 @@ export default HomeScreen = ({ navigation }) => {
         <Buds
           data={buds}
           renderItem={renderBud}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => item.id}
         />
       </BudContainer>
     </Container>
