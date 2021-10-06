@@ -22,9 +22,10 @@ export default function PostScreen({ navigation }) {
   const [location, setLocation] = useState('');
   const [thc, setThc] = useState('');
   const [cbd, setCbd] = useState('');
+  const [notes, setNotes] = useState('');
 
   const firebase = useContext(FirebaseContext);
-  const [user, _] = useContext(UserContext);
+  const [user] = useContext(UserContext);
 
   const handlePost = () => {
     if (!name.trim()) {
@@ -41,6 +42,7 @@ export default function PostScreen({ navigation }) {
         location: location.trim(),
         thc: thc,
         cbd: cbd,
+        notes: notes,
       });
     } catch (error) {
       alert(error);
@@ -51,6 +53,7 @@ export default function PostScreen({ navigation }) {
       setLocation('');
       setThc('');
       setCbd('');
+      setNotes('');
       navigation.goBack();
     }
   };
@@ -105,6 +108,14 @@ export default function PostScreen({ navigation }) {
             style={styles.input}
             onChangeText={(cbd) => setCbd(cbd)}
             value={cbd}
+          ></TextInput>
+          <Text style={styles.inputTitle}>Notes</Text>
+          <TextInput
+            style={[styles.input, { height: 108 }]}
+            onChangeText={(notes) => setNotes(notes)}
+            value={notes}
+            multiline={true}
+            numberOfLines={4}
           ></TextInput>
         </View>
       </ScrollView>
