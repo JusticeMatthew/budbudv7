@@ -5,6 +5,7 @@ export default {
     name: 'BudBud',
     description:
       'To sample this app you will need to download the EXPO app from your respective app store and then scan the provided QR code.',
+    primaryColor: '#15DB95',
     slug: 'BudBud',
     version: '1.0.0',
     orientation: 'portrait',
