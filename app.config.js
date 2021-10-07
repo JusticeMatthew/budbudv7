@@ -2,8 +2,10 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'BudBudv6',
-    slug: 'BudBudv6',
+    name: 'BudBud',
+    description:
+      'To sample this app you will need to download the EXPO app from your respective app store and then scan the provided QR code.',
+    slug: 'BudBud',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/icon.png',
@@ -20,6 +22,8 @@ export default {
       supportsTablet: true,
     },
     android: {
+      package: 'com.budbud.mjustice',
+      versionCode: 1,
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#FFFFFF',
