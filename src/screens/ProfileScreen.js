@@ -42,7 +42,7 @@ export default ProfileScreen = () => {
 const Container = styled.View`
   flex: 1;
   background-color: ${colors.blue};
-  padding-top: 64px;
+  padding: 64px 32px 0px;
   justify-content: space-between;
   align-items: center;
 `;

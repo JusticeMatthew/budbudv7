@@ -1,14 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
+import Text from '../components/Text';
 import colors from '../design/colors';
 
 export default FavoriteScreen = () => {
   return (
     <View style={styles.container}>
       <StatusBar style='light' />
-      <Text style={{ fontSize: 28, color: 'whitesmoke' }}>
+      <Text center title style={{ color: 'whitesmoke' }}>
         Search Coming Soon!
       </Text>
     </View>
