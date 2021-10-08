@@ -122,6 +122,7 @@ export default HomeScreen = () => {
 const Container = styled.View`
   flex: 1;
   background-color: ${colors.blue};
+  padding-top: 64px;
 `;
 
 const BudContainer = styled.View``;
