@@ -55,7 +55,6 @@ export default SignupScreen = ({ navigation }) => {
           <AuthField
             autoCapitalize='none'
             autoCorrect={false}
-            autoFocus={true}
             onChangeText={(name) => setName(name.trim())}
             value={name}
           />

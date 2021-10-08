@@ -27,7 +27,9 @@ export default HomeScreen = () => {
       .onSnapshot((snapshot) => {
         const budData = [];
         snapshot.forEach((doc) => {
-          budData.push(doc.data());
+          if (doc.data().favorite === true) {
+            budData.push(doc.data());
+          }
         });
         setBuds(budData);
       });
@@ -71,11 +73,7 @@ export default HomeScreen = () => {
             <PostHeader>
               <Text large>{item.name}</Text>
               <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
-                {item.favorite ? (
-                  <AntDesign name='heart' size={32} color={colors.green} />
-                ) : (
-                  <AntDesign name='hearto' size={32} color={colors.blue} />
-                )}
+                <AntDesign name='heart' size={32} color={colors.green} />
               </TouchableOpacity>
             </PostHeader>
             <Text medium>Price: {item.price}</Text>
@@ -94,16 +92,29 @@ export default HomeScreen = () => {
   return (
     <Container>
       <StatusBar style='light' />
-      <BudContainer>
-        <Text title center style={{ color: 'whitesmoke' }}>
-          Favorite Buds
-        </Text>
-        <Buds
-          data={buds}
-          renderItem={renderBud}
-          keyExtractor={(item) => item.id}
-        />
-      </BudContainer>
+      {buds.length === 0 ? (
+        <HelpTextContainer>
+          <Text title center style={{ color: 'whitesmoke', marginTop: 64 }}>
+            You can add a{' '}
+            <Text title center style={{ color: colors.green }}>
+              bud
+            </Text>{' '}
+            to your favorites any time by tapping the heart{' '}
+            <AntDesign name='hearto' size={32} color={colors.green} /> icon!
+          </Text>
+        </HelpTextContainer>
+      ) : (
+        <BudContainer>
+          <Text title center style={{ color: 'whitesmoke' }}>
+            Favorites
+          </Text>
+          <Buds
+            data={buds}
+            renderItem={renderBud}
+            keyExtractor={(item) => item.id}
+          />
+        </BudContainer>
+      )}
     </Container>
   );
 };
@@ -111,10 +122,16 @@ export default HomeScreen = () => {
 const Container = styled.View`
   flex: 1;
   background-color: ${colors.blue};
-  padding-top: 64px;
 `;
 
 const BudContainer = styled.View``;
+
+const HelpTextContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 32px;
+`;
 
 const Buds = styled.FlatList`
   margin: 18px 0 48px;

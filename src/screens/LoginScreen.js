@@ -55,7 +55,6 @@ export default LoginScreen = ({ navigation }) => {
             autoCapitalize='none'
             autoCompleteType='email'
             autoCorrect={false}
-            autoFocus={true}
             keyboardType='email-address'
             onChangeText={(email) => setEmail(email.trim())}
             value={email}

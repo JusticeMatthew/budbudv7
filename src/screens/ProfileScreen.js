@@ -22,11 +22,16 @@ export default ProfileScreen = () => {
 
   return (
     <Container>
-      <StatusBar style='dark' />
-      <Text>User ID: {user.uid}</Text>
+      <StatusBar style='light' />
+      <Text center title style={{ color: 'whitesmoke' }}>
+        Profile
+      </Text>
+      <Text center title style={{ color: 'whitesmoke', marginHorizontal: 64 }}>
+        Profile/stats page coming soon!
+      </Text>
 
       <Logout onPress={logout}>
-        <Text medium color='whitesmoke'>
+        <Text medium center color='whitesmoke'>
           Logout
         </Text>
       </Logout>
@@ -35,18 +40,20 @@ export default ProfileScreen = () => {
 };
 
 const Container = styled.View`
-  align-items: center;
-  margin-top: 64px;
   flex: 1;
+  background-color: ${colors.blue};
+  padding-top: 64px;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Logout = styled.TouchableOpacity`
   margin: 64px;
   color: whitesmoke;
-  background-color: ${colors.blue};
+  background-color: black;
   height: 48px;
   width: 112px;
   border-radius: 4px;
   justify-content: center;
-  align-items: center;
+  align-self: center;
 `;

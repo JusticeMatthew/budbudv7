@@ -90,16 +90,41 @@ export default HomeScreen = ({ navigation }) => {
   return (
     <Container>
       <StatusBar style='light' />
-      <BudContainer>
-        <Text title center style={{ color: 'whitesmoke' }}>
-          {user.name}'s Buds
-        </Text>
-        <Buds
-          data={buds}
-          renderItem={renderBud}
-          keyExtractor={(item) => item.id}
-        />
-      </BudContainer>
+      {buds.length === 0 ? (
+        <HelpTextContainer>
+          <Text title center style={{ color: 'whitesmoke' }}>
+            Welcome {user.name}, it appears you have no{' '}
+            <Text title center style={{ color: colors.green }}>
+              buds
+            </Text>{' '}
+            yet!
+          </Text>
+          <Text title center style={{ color: 'whitesmoke', marginTop: 32 }}>
+            You can add a{' '}
+            <Text title center style={{ color: colors.green }}>
+              bud
+            </Text>{' '}
+            by tapping the green circle icon below.
+          </Text>
+          <AntDesign
+            name='arrowdown'
+            size={75}
+            color='whitesmoke'
+            style={{ paddingTop: 128 }}
+          />
+        </HelpTextContainer>
+      ) : (
+        <BudContainer>
+          <Text title center style={{ color: 'whitesmoke' }}>
+            {user.name}'s Buds
+          </Text>
+          <Buds
+            data={buds}
+            renderItem={renderBud}
+            keyExtractor={(item) => item.id}
+          />
+        </BudContainer>
+      )}
     </Container>
   );
 };
@@ -111,6 +136,13 @@ const Container = styled.View`
 `;
 
 const BudContainer = styled.View``;
+
+const HelpTextContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 32px;
+`;
 
 const Buds = styled.FlatList`
   margin: 18px 0 48px;
