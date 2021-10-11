@@ -27,14 +27,14 @@ export default function PostScreen({ navigation }) {
   const firebase = useContext(FirebaseContext);
   const [user] = useContext(UserContext);
 
-  const handlePost = () => {
+  const handlePost = async () => {
     if (!name.trim()) {
       alert('Your bud requires at least a name');
       return;
     }
 
     try {
-      firebase.addBud({
+      await firebase.addBud({
         uid: user.uid,
         name: name.trim(),
         price: price,
