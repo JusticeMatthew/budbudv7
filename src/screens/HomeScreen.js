@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Swipeable } from 'react-native-gesture-handler';
-import { Animated, Button, TouchableOpacity } from 'react-native';
+import { Animated, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import firebase from 'firebase';
 import 'firebase/firestore';
@@ -13,7 +13,7 @@ import { FirebaseContext } from '../context/FirebaseContext';
 import Text from '../components/Text';
 import colors from '../design/colors';
 
-export default HomeScreen = ({ navigation }) => {
+export default HomeScreen = () => {
   const [user] = useContext(UserContext);
   const fireboss = useContext(FirebaseContext);
   const [buds, setBuds] = useState([]);
