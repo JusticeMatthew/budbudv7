@@ -82,6 +82,7 @@ export default HomeScreen = () => {
           <Text medium>Purchased at: {item.location}</Text>
           <Text medium>THC Amount: {item.thc}</Text>
           <Text medium>CBD Amount: {item.cbd}</Text>
+          <Text medium>Notes: {item.notes}</Text>
         </PostContent>
       </PostContainer>
     </Swipeable>

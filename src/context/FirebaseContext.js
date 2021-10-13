@@ -58,7 +58,7 @@ const Firebase = {
     }
   },
 
-  addBud: async ({ uid, name, price, type, location, thc, cbd }) => {
+  addBud: async ({ uid, name, price, type, location, thc, cbd, notes }) => {
     try {
       const docRef = await db
         .collection('users')
@@ -72,6 +72,7 @@ const Firebase = {
           thc,
           cbd,
           favorite: false,
+          notes,
         });
 
       await db
