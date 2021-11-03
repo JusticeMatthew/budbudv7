@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Swipeable } from 'react-native-gesture-handler';
-import { Animated, TouchableOpacity } from 'react-native';
+import { Animated, Touchable, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 import firebase from 'firebase';
@@ -14,7 +14,7 @@ import { FirebaseContext } from '../context/FirebaseContext';
 import Text from '../components/Text';
 import colors from '../design/colors';
 
-export default HomeScreen = () => {
+export default HomeScreen = ({ navigation }) => {
   const [user] = useContext(UserContext);
   const fireboss = useContext(FirebaseContext);
   const [buds, setBuds] = useState([]);
@@ -74,14 +74,16 @@ export default HomeScreen = () => {
       <PostContainer>
         <PostContent>
           <PostHeader>
-            <Text large>{item.name}</Text>
-            <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
-              {item.favorite ? (
-                <AntDesign name='heart' size={32} color={colors.green} />
-              ) : (
-                <AntDesign name='hearto' size={32} color={colors.blue} />
-              )}
-            </TouchableOpacity>
+            <Text title>{item.name}</Text>
+            <IconContainer>
+              <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
+                {item.favorite ? (
+                  <AntDesign name='heart' size={32} color={colors.green} />
+                ) : (
+                  <AntDesign name='hearto' size={32} color={colors.blue} />
+                )}
+              </TouchableOpacity>
+            </IconContainer>
           </PostHeader>
           <Text medium>Price: {item.price}</Text>
           <Text medium>Type of Medicine: {item.type}</Text>
@@ -90,6 +92,9 @@ export default HomeScreen = () => {
           <Text medium>CBD Amount: {item.cbd}</Text>
           <Text medium>Notes: {item.notes}</Text>
         </PostContent>
+        {/* <TouchableOpacity style={{ margin: 12, alignSelf: 'center' }}>
+          <AntDesign name='edit' size={32} color={colors.blue} />
+        </TouchableOpacity> */}
       </PostContainer>
     </Swipeable>
   );
@@ -165,6 +170,8 @@ const LoadingContainer = styled.View`
 
 const BudContainer = styled.View``;
 
+const IconContainer = styled.View``;
+
 const HelpTextContainer = styled.View`
   flex: 1;
   justify-content: center;
@@ -188,6 +195,7 @@ const PostHeader = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 8px;
+  align-items: center;
 `;
 
 const PostContent = styled.View`
@@ -203,5 +211,17 @@ const DeleteButton = styled.TouchableOpacity`
   align-items: center;
   border-radius: 6px;
   left: 30px;
-  margin-left: 30px;
+  margin: 0 30px;
+`;
+
+const EditButton = styled.TouchableOpacity`
+  height: 48px;
+  width: 72px;
+  background-color: yellow;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  left: 30px;
+  margin: 0 30px;
 `;

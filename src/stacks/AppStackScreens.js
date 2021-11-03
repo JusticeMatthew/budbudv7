@@ -7,6 +7,7 @@ import AuthStackScreens from './AuthStackScreens';
 import MainStackScreens from './MainStackScreens';
 import LoadingScreen from '../screens/LoadingScreen';
 import PostScreen from '../screens/PostScreen';
+import EditScreen from '../screens/EditScreen';
 
 export default AppStackScreens = () => {
   const AppStack = createStackNavigator();
@@ -23,6 +24,9 @@ export default AppStackScreens = () => {
       )}
       <AppStack.Group screenOptions={{ presentation: 'modal' }}>
         <AppStack.Screen name='AddModal' component={PostScreen} />
+      </AppStack.Group>
+      <AppStack.Group screenOptions={{ presentation: 'modal' }}>
+        <AppStack.Screen name='EditModal' component={EditScreen} />
       </AppStack.Group>
     </AppStack.Navigator>
   );
