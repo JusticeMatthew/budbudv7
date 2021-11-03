@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Swipeable } from 'react-native-gesture-handler';
 import { Animated, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import LottieView from 'lottie-react-native';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -17,8 +18,10 @@ export default HomeScreen = () => {
   const [user] = useContext(UserContext);
   const fireboss = useContext(FirebaseContext);
   const [buds, setBuds] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const unsubscribe = firebase
       .firestore()
       .collection('users')
@@ -30,6 +33,7 @@ export default HomeScreen = () => {
           budData.push(doc.data());
         });
         setBuds(budData);
+        setLoading(false);
       });
 
     return unsubscribe;
@@ -39,6 +43,7 @@ export default HomeScreen = () => {
     fireboss.setFavorite(docID);
   };
 
+  // Delete button
   const rightActions = (dragX, docID) => {
     const scale = dragX.interpolate({
       inputRange: [-100, -20],
@@ -63,6 +68,7 @@ export default HomeScreen = () => {
     );
   };
 
+  // Bud card
   const renderBud = ({ item }) => (
     <Swipeable renderRightActions={(_, dragX) => rightActions(dragX, item.id)}>
       <PostContainer>
@@ -88,10 +94,24 @@ export default HomeScreen = () => {
     </Swipeable>
   );
 
+  if (buds.length === 0 && loading) {
+    return (
+      <LoadingContainer>
+        <StatusBar style='light' />
+        <LottieView
+          source={require('../../assets/spinner.json')}
+          autoPlay
+          loop
+          style={{ width: '60%' }}
+        />
+      </LoadingContainer>
+    );
+  }
+
   return (
     <Container>
       <StatusBar style='light' />
-      {buds.length === 0 ? (
+      {buds.length === 0 && !loading ? (
         <HelpTextContainer>
           <Text title center style={{ color: 'whitesmoke' }}>
             Welcome {user.name}, it appears you have no{' '}
@@ -134,6 +154,13 @@ const Container = styled.View`
   flex: 1;
   background-color: ${colors.blue};
   padding-top: 64px;
+`;
+
+const LoadingContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.blue};
 `;
 
 const BudContainer = styled.View``;
