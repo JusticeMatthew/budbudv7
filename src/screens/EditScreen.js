@@ -16,15 +16,15 @@ import { UserContext } from '../context/UserContext';
 import colors from '../design/colors';
 
 export default function PostScreen({ navigation, route }) {
-  const { id } = route.params;
+  const { params } = route;
 
-  const [name, setName] = useState(id);
-  const [price, setPrice] = useState('');
-  const [type, setType] = useState('');
-  const [location, setLocation] = useState('');
-  const [thc, setThc] = useState('');
-  const [cbd, setCbd] = useState('');
-  const [notes, setNotes] = useState('');
+  const [name, setName] = useState(params.name);
+  const [price, setPrice] = useState(params.price);
+  const [type, setType] = useState(params.type);
+  const [location, setLocation] = useState(params.location);
+  const [thc, setThc] = useState(params.thc);
+  const [cbd, setCbd] = useState(params.cbd);
+  const [notes, setNotes] = useState(params.notes);
 
   const firebase = useContext(FirebaseContext);
   const [user] = useContext(UserContext);
@@ -36,8 +36,9 @@ export default function PostScreen({ navigation, route }) {
     }
 
     try {
-      await firebase.addBud({
+      await firebase.editBud({
         uid: user.uid,
+        docId: params.docId,
         name: name.trim(),
         price: price,
         type: type.trim(),
@@ -68,7 +69,7 @@ export default function PostScreen({ navigation, route }) {
           <Ionicons name='md-arrow-back' size={24} color={colors.gray} />
         </TouchableOpacity>
         <TouchableOpacity onPress={handlePost} style={styles.addButton}>
-          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Add</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Update</Text>
         </TouchableOpacity>
       </View>
       <ScrollView keyboardShouldPersistTaps='always'>
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.green,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 56,
+    width: 96,
     height: 32,
     borderRadius: 4,
   },

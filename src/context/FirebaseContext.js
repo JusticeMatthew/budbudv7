@@ -86,6 +86,37 @@ const Firebase = {
     }
   },
 
+  editBud: async ({
+    uid,
+    docId,
+    name,
+    price,
+    type,
+    location,
+    thc,
+    cbd,
+    notes,
+  }) => {
+    try {
+      await db
+        .collection('users')
+        .doc(uid)
+        .collection('buds')
+        .doc(docId)
+        .update({
+          name: name,
+          price: price,
+          type: type,
+          location: location,
+          thc: thc,
+          cbd: cbd,
+          notes: notes,
+        });
+    } catch (error) {
+      alert(error);
+    }
+  },
+
   deleteBud: async (docId) => {
     try {
       const uid = Firebase.getCurrentUser().uid;

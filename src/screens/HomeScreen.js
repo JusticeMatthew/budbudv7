@@ -44,7 +44,7 @@ export default HomeScreen = ({ navigation }) => {
   };
 
   // Delete button
-  const rightActions = (dragX, docID) => {
+  const rightActions = (dragX, docId) => {
     const scale = dragX.interpolate({
       inputRange: [-100, -20],
       outputRange: [1, 0.9],
@@ -52,7 +52,7 @@ export default HomeScreen = ({ navigation }) => {
     });
 
     return (
-      <DeleteButton onPress={() => fireboss.deleteBud(docID)}>
+      <DeleteButton onPress={() => fireboss.deleteBud(docId)}>
         <Animated.View>
           <Animated.Text
             style={{
@@ -68,9 +68,71 @@ export default HomeScreen = ({ navigation }) => {
     );
   };
 
+  const leftActions = (
+    dragX,
+    docId,
+    name,
+    price,
+    type,
+    location,
+    thc,
+    cbd,
+    notes,
+  ) => {
+    const scale = dragX.interpolate({
+      inputRange: [20, 100],
+      outputRange: [1, 0.9],
+      extrapolate: 'clamp',
+    });
+
+    return (
+      <EditButton
+        onPress={() => {
+          navigation.navigate('EditModal', {
+            docId,
+            name,
+            price,
+            type,
+            location,
+            thc,
+            cbd,
+            notes,
+          });
+        }}
+      >
+        <Animated.View>
+          <Animated.Text
+            style={{
+              fontSize: 18,
+              color: 'black',
+              transform: [{ scale }],
+            }}
+          >
+            Edit
+          </Animated.Text>
+        </Animated.View>
+      </EditButton>
+    );
+  };
+
   // Bud card
   const renderBud = ({ item }) => (
-    <Swipeable renderRightActions={(_, dragX) => rightActions(dragX, item.id)}>
+    <Swipeable
+      renderRightActions={(_, dragX) => rightActions(dragX, item.id)}
+      renderLeftActions={(_, dragX) =>
+        leftActions(
+          dragX,
+          item.id,
+          item.name,
+          item.price,
+          item.type,
+          item.location,
+          item.thc,
+          item.cbd,
+          item.notes,
+        )
+      }
+    >
       <PostContainer>
         <PostContent>
           <PostHeader>
@@ -92,9 +154,6 @@ export default HomeScreen = ({ navigation }) => {
           <Text medium>CBD Amount: {item.cbd}</Text>
           <Text medium>Notes: {item.notes}</Text>
         </PostContent>
-        {/* <TouchableOpacity style={{ margin: 12, alignSelf: 'center' }}>
-          <AntDesign name='edit' size={32} color={colors.blue} />
-        </TouchableOpacity> */}
       </PostContainer>
     </Swipeable>
   );

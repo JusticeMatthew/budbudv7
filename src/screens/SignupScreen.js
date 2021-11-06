@@ -29,7 +29,7 @@ export default SignupScreen = ({ navigation }) => {
       const createdUser = await firebase.createUser(user);
 
       if (createdUser) {
-        setUser({ ...createdUser, isLoggedIn: true });
+        setUser({ ...createdUser, isLoggedIn: true, firstLogin: true });
       }
     } catch (error) {
       console.log('Error @Signup: ', error);

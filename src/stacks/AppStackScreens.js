@@ -8,6 +8,7 @@ import MainStackScreens from './MainStackScreens';
 import LoadingScreen from '../screens/LoadingScreen';
 import PostScreen from '../screens/PostScreen';
 import EditScreen from '../screens/EditScreen';
+import OnboardingScreen from '../screens/OnboardingScreen';
 
 export default AppStackScreens = () => {
   const AppStack = createStackNavigator();
@@ -15,7 +16,9 @@ export default AppStackScreens = () => {
 
   return (
     <AppStack.Navigator screenOptions={{ headerShown: false }}>
-      {user.isLoggedIn === null ? (
+      {user.firstLogin === true ? (
+        <AppStack.Screen name='Onboarding' component={OnboardingScreen} />
+      ) : user.isLoggedIn === null ? (
         <AppStack.Screen name='Loading' component={LoadingScreen} />
       ) : user.isLoggedIn ? (
         <AppStack.Screen name='Main' component={MainStackScreens} />
