@@ -5,7 +5,7 @@ import colors from '../design/colors';
 
 import HomeScreen from '../screens/HomeScreen';
 import FavoriteScreen from '../screens/FavoriteScreen';
-import FilterScreen from '../screens/FilterScreen';
+import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
 export default MainStackScreens = () => {
@@ -64,7 +64,7 @@ export default MainStackScreens = () => {
           },
         })}
       />
-      <MainStack.Screen name='Search' component={FilterScreen} />
+      <MainStack.Screen name='Search' component={SearchScreen} />
       <MainStack.Screen name='Profile' component={ProfileScreen} />
     </MainStack.Navigator>
   );

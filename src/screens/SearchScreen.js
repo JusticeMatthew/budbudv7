@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 import Text from '../components/Text';
 import colors from '../design/colors';
 
-export default FavoriteScreen = () => {
+export default SearchScreen = () => {
   return (
     <View style={styles.container}>
       <StatusBar style='light' />

@@ -1,4 +1,10 @@
 {
   "cSpell.ignoreWords": ["Swipable", "Swipeable"],
-  "cSpell.words": ["closecircle", "fireboss", "hearto", "viewability"]
+  "cSpell.words": [
+    "closecircle",
+    "fireboss",
+    "getuserinfo",
+    "hearto",
+    "viewability"
+  ]
 }

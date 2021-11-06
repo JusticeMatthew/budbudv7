@@ -138,7 +138,7 @@ export default HomeScreen = ({ navigation }) => {
         <PostContainer>
           <PostContent>
             <PostHeader>
-              <Text large>{item.name}</Text>
+              <Text title>{item.name}</Text>
               <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
                 <AntDesign name='heart' size={32} color={colors.green} />
               </TouchableOpacity>
@@ -148,6 +148,7 @@ export default HomeScreen = ({ navigation }) => {
             <Text medium>Purchased at: {item.location}</Text>
             <Text medium>THC Amount: {item.thc}</Text>
             <Text medium>CBD Amount: {item.cbd}</Text>
+            <Text medium>Notes: {item.notes}</Text>
           </PostContent>
         </PostContainer>
       ) : (
