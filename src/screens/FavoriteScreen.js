@@ -15,7 +15,7 @@ import { FirebaseContext } from '../context/FirebaseContext';
 import Text from '../components/Text';
 import colors from '../design/colors';
 
-export default HomeScreen = () => {
+export default HomeScreen = ({ navigation }) => {
   const [user] = useContext(UserContext);
   const fireboss = useContext(FirebaseContext);
   const [buds, setBuds] = useState([]);
@@ -70,8 +70,70 @@ export default HomeScreen = () => {
     );
   };
 
+  const leftActions = (
+    dragX,
+    docId,
+    name,
+    price,
+    type,
+    location,
+    thc,
+    cbd,
+    notes,
+  ) => {
+    const scale = dragX.interpolate({
+      inputRange: [20, 100],
+      outputRange: [1, 0.9],
+      extrapolate: 'clamp',
+    });
+
+    return (
+      <EditButton
+        onPress={() => {
+          navigation.navigate('EditModal', {
+            docId,
+            name,
+            price,
+            type,
+            location,
+            thc,
+            cbd,
+            notes,
+          });
+        }}
+      >
+        <Animated.View>
+          <Animated.Text
+            style={{
+              fontSize: 18,
+              color: 'black',
+              transform: [{ scale }],
+            }}
+          >
+            Edit
+          </Animated.Text>
+        </Animated.View>
+      </EditButton>
+    );
+  };
+
   const renderBud = ({ item }) => (
-    <Swipeable renderRightActions={(_, dragX) => rightActions(dragX, item.id)}>
+    <Swipeable
+      renderRightActions={(_, dragX) => rightActions(dragX, item.id)}
+      renderLeftActions={(_, dragX) =>
+        leftActions(
+          dragX,
+          item.id,
+          item.name,
+          item.price,
+          item.type,
+          item.location,
+          item.thc,
+          item.cbd,
+          item.notes,
+        )
+      }
+    >
       {item.favorite === true ? (
         <PostContainer>
           <PostContent>
@@ -192,4 +254,16 @@ const DeleteButton = styled.TouchableOpacity`
   border-radius: 6px;
   left: 30px;
   margin-left: 30px;
+`;
+
+const EditButton = styled.TouchableOpacity`
+  height: 48px;
+  width: 72px;
+  background-color: yellow;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  left: 30px;
+  margin: 0 30px;
 `;
