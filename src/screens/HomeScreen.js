@@ -2,8 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Swipeable } from 'react-native-gesture-handler';
-import { Animated, Touchable, TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { Animated, TouchableOpacity } from 'react-native';
+import { AntDesign, Feather } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 import firebase from 'firebase';
 import 'firebase/firestore';
@@ -15,7 +15,7 @@ import Text from '../components/Text';
 import colors from '../design/colors';
 
 export default HomeScreen = ({ navigation }) => {
-  const [user] = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
   const fireboss = useContext(FirebaseContext);
   const [buds, setBuds] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -43,6 +43,14 @@ export default HomeScreen = ({ navigation }) => {
     fireboss.setFavorite(docID);
   };
 
+  const handleCompaction = () => {
+    setUser({ ...user, compact: true });
+  };
+
+  const handleExpansion = () => {
+    setUser({ ...user, compact: false });
+  };
+
   // Delete button
   const rightActions = (dragX, docId) => {
     const scale = dragX.interpolate({
@@ -68,76 +76,32 @@ export default HomeScreen = ({ navigation }) => {
     );
   };
 
-  const leftActions = (
-    dragX,
-    docId,
-    name,
-    price,
-    type,
-    location,
-    thc,
-    cbd,
-    notes,
-  ) => {
-    const scale = dragX.interpolate({
-      inputRange: [20, 100],
-      outputRange: [1, 0.9],
-      extrapolate: 'clamp',
-    });
-
-    return (
-      <EditButton
+  // Bud card
+  const renderBud = ({ item }) => (
+    <Swipeable renderRightActions={(_, dragX) => rightActions(dragX, item.id)}>
+      <TouchableOpacity
+        activeOpacity={1}
         onPress={() => {
           navigation.navigate('EditModal', {
-            docId,
-            name,
-            price,
-            type,
-            location,
-            thc,
-            cbd,
-            notes,
+            docId: item.id,
+            name: item.name,
+            price: item.price,
+            type: item.type,
+            location: item.location,
+            thc: item.thc,
+            cbd: item.cbd,
+            notes: item.notes,
           });
         }}
       >
-        <Animated.View>
-          <Animated.Text
-            style={{
-              fontSize: 18,
-              color: 'black',
-              transform: [{ scale }],
-            }}
-          >
-            Edit
-          </Animated.Text>
-        </Animated.View>
-      </EditButton>
-    );
-  };
-
-  // Bud card
-  const renderBud = ({ item }) => (
-    <Swipeable
-      renderRightActions={(_, dragX) => rightActions(dragX, item.id)}
-      renderLeftActions={(_, dragX) =>
-        leftActions(
-          dragX,
-          item.id,
-          item.name,
-          item.price,
-          item.type,
-          item.location,
-          item.thc,
-          item.cbd,
-          item.notes,
-        )
-      }
-    >
-      <PostContainer>
-        <PostContent>
-          <PostHeader>
-            <Text title>{item.name}</Text>
-            <IconContainer>
+        <PostContainer>
+          <PostContent>
+            <PostHeader>
+              <TitleContainer>
+                <Text numberOfLines={1} title>
+                  {item.name}
+                </Text>
+              </TitleContainer>
               <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
                 {item.favorite ? (
                   <AntDesign name='heart' size={32} color={colors.green} />
@@ -145,19 +109,28 @@ export default HomeScreen = ({ navigation }) => {
                   <AntDesign name='hearto' size={32} color={colors.blue} />
                 )}
               </TouchableOpacity>
-            </IconContainer>
-          </PostHeader>
-          <Text medium>Price: {item.price}</Text>
-          <Text medium>Type of Medicine: {item.type}</Text>
-          <Text medium>Purchased at: {item.location}</Text>
-          <Text medium>THC Amount: {item.thc}</Text>
-          <Text medium>CBD Amount: {item.cbd}</Text>
-          <Text medium>Notes: {item.notes}</Text>
-        </PostContent>
-      </PostContainer>
+            </PostHeader>
+            {user.compact ? (
+              <></>
+            ) : (
+              <>
+                <Text medium>Price: {item.price}</Text>
+                <Text medium>Type of Medicine: {item.type}</Text>
+                <Text medium>Purchased at: {item.location}</Text>
+                <Text medium>THC Amount: {item.thc}</Text>
+                <Text medium>CBD Amount: {item.cbd}</Text>
+                <Text medium numberOfLines={3}>
+                  Notes: {item.notes}
+                </Text>
+              </>
+            )}
+          </PostContent>
+        </PostContainer>
+      </TouchableOpacity>
     </Swipeable>
   );
 
+  // Loader
   if (buds.length === 0 && loading) {
     return (
       <LoadingContainer>
@@ -172,6 +145,7 @@ export default HomeScreen = ({ navigation }) => {
     );
   }
 
+  // Home Screen
   return (
     <Container>
       <StatusBar style='light' />
@@ -203,8 +177,19 @@ export default HomeScreen = ({ navigation }) => {
           <Text title center style={{ color: 'whitesmoke' }}>
             {user.name}'s Buds
           </Text>
+          <ExpandIconContainer>
+            <TouchableOpacity
+              onPress={user.compact ? handleExpansion : handleCompaction}
+            >
+              <Feather
+                name='menu'
+                size={32}
+                color={!user.compact ? 'whitesmoke' : colors.green}
+              />
+            </TouchableOpacity>
+          </ExpandIconContainer>
           <Buds
-            data={buds}
+            data={buds.sort((a, b) => a.name.localeCompare(b.name))}
             renderItem={renderBud}
             keyExtractor={(item) => item.id}
           />
@@ -214,6 +199,7 @@ export default HomeScreen = ({ navigation }) => {
   );
 };
 
+// Styles
 const Container = styled.View`
   flex: 1;
   background-color: ${colors.blue};
@@ -227,15 +213,26 @@ const LoadingContainer = styled.View`
   background-color: ${colors.blue};
 `;
 
-const BudContainer = styled.View``;
+const BudContainer = styled.View`
+  margin-bottom: 64px;
+`;
 
-const IconContainer = styled.View``;
+const TitleContainer = styled.View`
+  max-width: 240px;
+`;
 
 const HelpTextContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
   margin: 0px 32px;
+`;
+
+const ExpandIconContainer = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 0 0;
 `;
 
 const Buds = styled.FlatList`
@@ -265,18 +262,6 @@ const DeleteButton = styled.TouchableOpacity`
   height: 48px;
   width: 72px;
   background-color: red;
-  align-self: center;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  left: 30px;
-  margin: 0 30px;
-`;
-
-const EditButton = styled.TouchableOpacity`
-  height: 48px;
-  width: 72px;
-  background-color: yellow;
   align-self: center;
   justify-content: center;
   align-items: center;

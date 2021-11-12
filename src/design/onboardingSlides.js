@@ -17,7 +17,7 @@ export default [
     id: '3',
     title: 'Changing a bud',
     description:
-      'You can swipe a bud to the right to edit it, or to the left to delete it.',
+      'Tap on a bud to see more details and make changes or swipe to the left to delete it.',
     image: require('../../assets/images/update.png'),
   },
   {
