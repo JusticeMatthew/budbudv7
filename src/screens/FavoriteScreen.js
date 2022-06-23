@@ -114,11 +114,7 @@ export default HomeScreen = ({ navigation }) => {
                 <></>
               ) : (
                 <>
-                  <Text medium>Price: {item.price}</Text>
-                  <Text medium>Type of Medicine: {item.type}</Text>
                   <Text medium>Purchased at: {item.location}</Text>
-                  <Text medium>THC Amount: {item.thc}</Text>
-                  <Text medium>CBD Amount: {item.cbd}</Text>
                   <Text medium numberOfLines={3}>
                     Notes: {item.notes}
                   </Text>
@@ -166,7 +162,7 @@ export default HomeScreen = ({ navigation }) => {
           <Text title center style={{ color: 'whitesmoke' }}>
             Favorites
           </Text>
-          <ExpandIconContainer>
+          {/* <ExpandIconContainer>
             <TouchableOpacity
               onPress={user.compact ? handleExpansion : handleCompaction}
             >
@@ -176,7 +172,7 @@ export default HomeScreen = ({ navigation }) => {
                 color={!user.compact ? 'whitesmoke' : colors.green}
               />
             </TouchableOpacity>
-          </ExpandIconContainer>
+          </ExpandIconContainer> */}
           <Buds
             data={buds.sort((a, b) => a.name.localeCompare(b.name))}
             renderItem={renderBud}
