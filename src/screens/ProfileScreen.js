@@ -27,9 +27,14 @@ export default ProfileScreen = () => {
         Profile
       </Text>
       <Text center title style={{ color: 'whitesmoke', marginHorizontal: 64 }}>
-        Profile/stats page coming soon!
+        {user.name}'s Info
       </Text>
-
+      <Text center style={{ color: 'whitesmoke', marginHorizontal: 64 }}>
+        Email: {user.email}
+      </Text>
+      <Text center style={{ color: 'whitesmoke', marginHorizontal: 64 }}>
+        Unique ID: {user.uid}
+      </Text>
       <Logout onPress={logout}>
         <Text medium center color='whitesmoke'>
           Logout
