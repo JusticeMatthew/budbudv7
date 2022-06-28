@@ -96,8 +96,7 @@ export default LoginScreen = ({ navigation }) => {
       </Signup>
       <Reset onPress={() => passwordResetHandler()}>
         <Text small center style={{ color: 'whitesmoke' }}>
-          Forgot password?{' '}
-          <Text style={{ color: colors.green, fontWeight: 'bold' }}>Reset</Text>
+          Forgot password?
         </Text>
       </Reset>
     </Container>
