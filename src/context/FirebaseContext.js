@@ -161,6 +161,10 @@ const Firebase = {
   login: async (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   },
+
+  passwordReset: async (email) => {
+    return firebase.auth().sendPasswordResetEmail(email);
+  },
 };
 
 const FirebaseProvider = (props) => {

@@ -150,5 +150,5 @@ const Loading = styled.ActivityIndicator.attrs((props) => ({
 }))``;
 
 const Login = styled.TouchableOpacity`
-  margin-top: 16px;
+  margin-top: 48px;
 `;

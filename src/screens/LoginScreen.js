@@ -38,6 +38,13 @@ export default LoginScreen = ({ navigation }) => {
     }
   };
 
+  const passwordResetHandler = () => {
+    if (email) {
+      firebase.passwordReset(email);
+      alert('Password reset email sent.');
+    }
+  };
+
   return (
     <Container>
       <StatusBar style='light' />
@@ -87,6 +94,12 @@ export default LoginScreen = ({ navigation }) => {
           </Text>
         </Text>
       </Signup>
+      <Reset onPress={() => passwordResetHandler()}>
+        <Text small center style={{ color: 'whitesmoke' }}>
+          Forgot password?{' '}
+          <Text style={{ color: colors.green, fontWeight: 'bold' }}>Reset</Text>
+        </Text>
+      </Reset>
     </Container>
   );
 };
@@ -142,5 +155,8 @@ const Loading = styled.ActivityIndicator.attrs((props) => ({
 }))``;
 
 const Signup = styled.TouchableOpacity`
-  margin-top: 16px;
+  margin-top: 48px;
+  margin-bottom: 24px;
 `;
+
+const Reset = styled.TouchableOpacity``;

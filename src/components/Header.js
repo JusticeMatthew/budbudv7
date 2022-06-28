@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 64,
     color: colors.green,
-    marginTop: 64,
+    marginTop: 58,
   },
 });
