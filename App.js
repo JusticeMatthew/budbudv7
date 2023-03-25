@@ -8,6 +8,7 @@ import { FirebaseProvider } from './src/context/FirebaseContext';
 import AppStackScreens from './src/stacks/AppStackScreens';
 
 LogBox.ignoreLogs(['Each child']);
+LogBox.ignoreLogs(['AsyncStorage has been removed from react-native core.']);
 
 export default App = () => {
   return (

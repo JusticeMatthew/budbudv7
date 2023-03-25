@@ -33,6 +33,7 @@ export default {
     web: {
       favicon: './assets/favicon.png',
     },
+    plugins: ['@react-native-firebase/app', '@react-native-firebase/auth'],
     extra: {
       apiKey: process.env.API_KEY,
       authDomain: process.env.AUTH_DOMAIN,
