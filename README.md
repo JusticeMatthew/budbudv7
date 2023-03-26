@@ -25,12 +25,13 @@ BudBud is a mobile app designed to assist medical marijuana patients with tracki
 Currently there is an incompatability between Firebase and React Native due to the `AsyncStorage` issue. This prevents the app from functioning right now but a fix is being worked on according to the Firebase repo.
 ## Tech Stack
 
-![React](https://img.shields.io/badge/React%20Native-2E3440?style=for-the-badge&logo=react)![Expo](https://img.shields.io/badge/Expo-2E3440?style=for-the-badge&logo=Expo) 
+![React](https://img.shields.io/badge/React%20Native-2E3440?style=for-the-badge&logo=react)
+![Expo](https://img.shields.io/badge/Expo-2E3440?style=for-the-badge&logo=Expo)
 ![Firebase](https://img.shields.io/badge/Firebase-2E3440?style=for-the-badge&logo=firebase)
 ![Styled-Components](https://img.shields.io/badge/Styled%20Components-2E3440?style=for-the-badge&logo=styled-components)
 ## Contributing
 
-BudBud is and always will be open source. Feel free to submit a pull request if you have something to contribue!
+BudBud is and always will be open source. Feel free to submit a pull request if you have something to contribute!
 
 
 
