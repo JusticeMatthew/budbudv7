@@ -64,6 +64,7 @@ APP_ID
 **4.** Connect the App to Firebase.
 
 - Click on the icon to add a `web` app
+
 ![add web app](https://budbud-readme.s3.amazonaws.com/BudBudReadmeStuff/AddWebApp.png)
 - Choose a nickname for the app and click `Register app`
 - Copy the values from the `firebaseConfig` object to your `.env` file
