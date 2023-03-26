@@ -12,7 +12,6 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
     height: 128,
     alignSelf: 'center',
   },
@@ -21,6 +20,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 64,
     color: colors.green,
-    marginTop: 58,
+    marginTop: 36,
   },
 });

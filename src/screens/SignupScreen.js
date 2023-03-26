@@ -39,8 +39,8 @@ export default SignupScreen = ({ navigation }) => {
   };
 
   return (
-    <Container>
-      <StatusBar style='light' />
+    <Container behavior="padding">
+      <StatusBar style="light" />
       <Header />
 
       <Main>
@@ -53,7 +53,7 @@ export default SignupScreen = ({ navigation }) => {
         <AuthContainer>
           <AuthTitle>First Name</AuthTitle>
           <AuthField
-            autoCapitalize='none'
+            autoCapitalize="none"
             autoCorrect={false}
             onChangeText={(name) => setName(name.trim())}
             value={name}
@@ -63,10 +63,10 @@ export default SignupScreen = ({ navigation }) => {
         <AuthContainer>
           <AuthTitle>Email Address</AuthTitle>
           <AuthField
-            autoCapitalize='none'
-            autoCompleteType='email'
+            autoCapitalize="none"
+            autoCompleteType="email"
             autoCorrect={false}
-            keyboardType='email-address'
+            keyboardType="email-address"
             onChangeText={(email) => setEmail(email.trim())}
             value={email}
           />
@@ -75,8 +75,8 @@ export default SignupScreen = ({ navigation }) => {
         <AuthContainer>
           <AuthTitle>Password</AuthTitle>
           <AuthField
-            autoCapitalize='none'
-            autoCompleteType='password'
+            autoCapitalize="none"
+            autoCompleteType="password"
             autoCorrect={false}
             secureTextEntry={true}
             onChangeText={(password) => setPassword(password.trim())}
@@ -99,13 +99,14 @@ export default SignupScreen = ({ navigation }) => {
   );
 };
 
-const Container = styled.View`
+const Container = styled.KeyboardAvoidingView`
   background-color: ${colors.blue};
   flex: 1;
+  justify-content: center;
 `;
 
 const Main = styled.View`
-  margin-top: 192px;
+  margin-top: 30px;
 `;
 
 const Auth = styled.View`
