@@ -5,8 +5,8 @@ import { Swipeable } from 'react-native-gesture-handler';
 import { Animated, TouchableOpacity } from 'react-native';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
-import firebase from 'firebase';
-import 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 
 import { UserContext } from '../context/UserContext';
 import { FirebaseContext } from '../context/FirebaseContext';
@@ -104,9 +104,9 @@ export default HomeScreen = ({ navigation }) => {
               </TitleContainer>
               <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
                 {item.favorite ? (
-                  <AntDesign name='heart' size={32} color={colors.green} />
+                  <AntDesign name="heart" size={32} color={colors.green} />
                 ) : (
-                  <AntDesign name='hearto' size={32} color={colors.blue} />
+                  <AntDesign name="hearto" size={32} color={colors.blue} />
                 )}
               </TouchableOpacity>
             </PostHeader>
@@ -130,7 +130,7 @@ export default HomeScreen = ({ navigation }) => {
   if (buds.length === 0 && loading) {
     return (
       <LoadingContainer>
-        <StatusBar style='light' />
+        <StatusBar style="light" />
         <LottieView
           source={require('../../assets/spinner.json')}
           autoPlay
@@ -144,7 +144,7 @@ export default HomeScreen = ({ navigation }) => {
   // Home Screen
   return (
     <Container>
-      <StatusBar style='light' />
+      <StatusBar style="light" />
       {buds.length === 0 && !loading ? (
         <HelpTextContainer>
           <Text title center style={{ color: 'whitesmoke' }}>
@@ -162,9 +162,9 @@ export default HomeScreen = ({ navigation }) => {
             by tapping the green circle icon below.
           </Text>
           <AntDesign
-            name='arrowdown'
+            name="arrowdown"
             size={75}
-            color='whitesmoke'
+            color="whitesmoke"
             style={{ paddingTop: 128 }}
           />
         </HelpTextContainer>

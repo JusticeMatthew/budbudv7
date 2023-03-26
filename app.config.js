@@ -21,10 +21,13 @@ export default {
     assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true,
+      bundleIdentifier: 'com.budbud.budbud',
+      googleServicesFile: './GoogleService-Info.plist',
     },
     android: {
-      package: 'com.budbud.mjustice',
+      package: 'com.budbud.budbud',
       versionCode: 1,
+      googleServicesFile: './GoogleService-Info.plist',
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#FFFFFF',
@@ -33,7 +36,6 @@ export default {
     web: {
       favicon: './assets/favicon.png',
     },
-    plugins: ['@react-native-firebase/app', '@react-native-firebase/auth'],
     extra: {
       apiKey: process.env.API_KEY,
       authDomain: process.env.AUTH_DOMAIN,
@@ -41,6 +43,9 @@ export default {
       storageBucket: process.env.STORAGE_BUCKET,
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
       appId: process.env.APP_ID,
+      eas: {
+        projectId: process.env.EAS_PROJECT_ID,
+      },
     },
   },
 };

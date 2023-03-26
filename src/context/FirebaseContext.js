@@ -1,9 +1,9 @@
 import React, { createContext } from 'react';
 import Constants from 'expo-constants';
 
-import firebase from 'firebase';
-import 'firebase/auth';
-import 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 const config = {
   apiKey: Constants.manifest.extra.apiKey,

@@ -6,8 +6,8 @@ import { Animated, TouchableOpacity } from 'react-native';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 
-import firebase from 'firebase';
-import 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 
 import { UserContext } from '../context/UserContext';
 import { FirebaseContext } from '../context/FirebaseContext';
@@ -107,7 +107,7 @@ export default HomeScreen = ({ navigation }) => {
                   </Text>
                 </TitleContainer>
                 <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
-                  <AntDesign name='heart' size={32} color={colors.green} />
+                  <AntDesign name="heart" size={32} color={colors.green} />
                 </TouchableOpacity>
               </PostHeader>
               {user.compact ? (
@@ -132,7 +132,7 @@ export default HomeScreen = ({ navigation }) => {
   if (buds.length === 0 && loading) {
     return (
       <LoadingContainer>
-        <StatusBar style='light' />
+        <StatusBar style="light" />
         <LottieView
           source={require('../../assets/spinner.json')}
           autoPlay
@@ -145,7 +145,7 @@ export default HomeScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <StatusBar style='light' />
+      <StatusBar style="light" />
       {buds.length === 0 && !loading ? (
         <HelpTextContainer>
           <Text title center style={{ color: 'whitesmoke', marginTop: 64 }}>
@@ -154,7 +154,7 @@ export default HomeScreen = ({ navigation }) => {
               bud
             </Text>{' '}
             to your favorites any time by tapping the heart{' '}
-            <AntDesign name='hearto' size={32} color={colors.green} /> icon!
+            <AntDesign name="hearto" size={32} color={colors.green} /> icon!
           </Text>
         </HelpTextContainer>
       ) : (
