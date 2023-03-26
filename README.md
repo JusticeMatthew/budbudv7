@@ -21,8 +21,6 @@ BudBud is a mobile app designed to assist medical marijuana patients with tracki
 - Live search (may require a subscriptive service like Algolia)
 
 
-## Bugs
-Currently there is an incompatability between Firebase and React Native due to the `AsyncStorage` issue. This prevents the app from functioning right now but a fix is being worked on according to the Firebase repo.
 ## Tech Stack
 
 ![React](https://img.shields.io/badge/React%20Native-2E3440?style=for-the-badge&logo=react)
