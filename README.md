@@ -25,6 +25,8 @@ BudBud is a mobile app designed to assist medical marijuana patients with tracki
 
 - Live search (may require a subscriptive service like Algolia)
 
+- AI recommendations based on terpene compositions
+
 
 ## Tech Stack
 
