@@ -31,9 +31,12 @@ BudBud is a mobile app designed to assist medical marijuana patients with tracki
 
 BudBud is and always will be open source. Feel free to submit a pull request if you have something to contribute!
 
-
-
 ## Dev environment setup
+
+# DUE TO EXPO UPDATES THESE INSTRUCTIONS PROBABLY WILL NOT WORK
+I plan to hopefully get around to updating everything and getting it working again but for now this project is on the back burner
+
+
 
 **1.** Set up Expo and Google Firebase.
 
